@@ -1,0 +1,65 @@
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Revive TankiX player count</title>
+<script>
+  (() => {
+    let httpRequest;
+    document
+	  
+    window.onload = makeRequest()
+    function makeRequest() {
+      httpRequest = new XMLHttpRequest();
+
+      if (!httpRequest) {
+        alert("Giving up :( Cannot create an XMLHTTP instance");
+        return false;
+      }
+
+      httpRequest.onreadystatechange = alertContents;
+      httpRequest.open("GET", "https://mctmvk.ru/Discord-Scraper/source/online.txt");
+      httpRequest.send();
+    }
+
+    function alertContents() {
+      if (httpRequest.readyState === XMLHttpRequest.DONE) {
+        if (httpRequest.status === 200) {
+		  document.getElementById("p1").innerHTML = "~ " + httpRequest.responseText;
+          //alert(httpRequest.responseText);
+        } else {
+          alert("There was a problem with the request.");
+        }
+      }
+    }
+  })();
+  
+</script>
+<style>
+.d {
+  background-color: white;
+  width: 200;
+  border: 2px solid black;
+  padding: 50px;
+  margin: 20px;
+  text-align: center;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+.d2 {
+  background-color: white;
+  border: 2px solid black;
+  text-align: center;
+  position: relative;
+  
+}
+</style>
+<body style="background-color: #f5d6b8;">
+	<div class="d">
+		<h3>There are currently around</h3>
+		<h1 id="p1">...</h1>
+		<h3>players in Revive TankiX</h3>
+		<p>(according to the official discord server)</p>
+	</div>
+</body>
+
